@@ -17,7 +17,7 @@
 
 
 (define-test test-basic-array-stuff
-    " the first block of code defines an 8x8 array, then fills
+  " the first block of code defines an 8x8 array, then fills
       the elements with a checkerboard pattern"
   (let ((chess-board))
     (setf chess-board (make-array '(8 8)))
@@ -26,8 +26,8 @@
       (dotimes (y 8)
         (if (evenp (+ x y))
             (setf (aref chess-board x y) :black)
-            (setf (aref chess-board x y) :white)
-            )))
+          (setf (aref chess-board x y) :white)
+          )))
     (assert-true (typep chess-board 'array))
     (assert-equal (aref chess-board 0 0) :black)
     (assert-equal (aref chess-board 2 3) :white)
@@ -38,30 +38,30 @@
     (assert-equal 64 (array-total-size chess-board))))
 
 (define-test test-make-your-own-array
-    "make your own array that meets the specifications below."
+  "make your own array that meets the specifications below."
   (let ((color-cube nil))
     "you may need to modify your array after you make it"
     (if (typep color-cube '(simple-array T (3 3 3)))
         (progn
-        (dotimes (x 3)
-            (dotimes (y 3)
-                (dotimes (z 3)
-                    (if (and (eq x 0) (eq z 2))
-                        (setf (aref color-cube x y z) :red)
-                        )
-                    (if (and (eq x 2) (eq z 0))                                
-                        (setf (aref color-cube x y z) :white)                    
-                        ))))
-          (assert-equal 3 (array-rank color-cube))
-          (assert-equal '(3 3 3) (array-dimensions color-cube))
-          (assert-equal 27 (array-total-size color-cube))
-          (assert-equal (aref color-cube 0 1 2) :red)
-          (assert-equal (aref color-cube 2 1 0) :white))
-        (assert-true t))))
+         (dotimes (x 3)
+           (dotimes (y 3)
+             (dotimes (z 3)
+               (if (and (eq x 0) (eq z 2))
+                   (setf (aref color-cube x y z) :red)
+                 )
+               (if (and (eq x 2) (eq z 0))
+                   (setf (aref color-cube x y z) :white)
+                 ))))
+         (assert-equal 3 (array-rank color-cube))
+         (assert-equal '(3 3 3) (array-dimensions color-cube))
+         (assert-equal 27 (array-total-size color-cube))
+         (assert-equal (aref color-cube 0 1 2) :red)
+         (assert-equal (aref color-cube 2 1 0) :white))
+      (assert-true t))))
 
 
 (define-test test-adjustable-array
-    "one may build arrays that can change size"
+  "one may build arrays that can change size"
   (let ((x (make-array '(2 2) :initial-element 5 :adjustable t)))
     (assert-equal (aref x 1 0) 5)
     (assert-equal (array-dimensions x) '(2 2))
@@ -78,7 +78,7 @@
 
 
 (define-test test-row-major-index
-    "row major indexing is a way to access elements with a single integer,
+  "row major indexing is a way to access elements with a single integer,
      rather than a list of integers"
   (let ((my-array nil))
     (setf my-array (make-array '(2 2 2 2)))

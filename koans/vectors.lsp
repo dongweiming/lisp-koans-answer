@@ -25,24 +25,24 @@
 
 
 (define-test test-bit-vector
-    "#*0011 defines a bit vector literal with four elements, 0, 0, 1 and 1"
+  "#*0011 defines a bit vector literal with four elements, 0, 0, 1 and 1"
   (assert-equal #*0000 (make-array '4 :element-type 'bit))
   (true-or-false? t (typep #*1001 'bit-vector))
   (assert-equal 0 (aref #*1001 1)))
 
 
 (define-test test-some-bitwise-operations
-    (assert-equal #*1000 (bit-and #*1100 #*1010))
-    (assert-equal #*1110 (bit-ior #*1100 #*1010))
-    (assert-equal #*0110 (bit-xor #*1100 #*1010)))
+  (assert-equal #*1000 (bit-and #*1100 #*1010))
+  (assert-equal #*1110 (bit-ior #*1100 #*1010))
+  (assert-equal #*0110 (bit-xor #*1100 #*1010)))
 
 
 (defun list-to-bit-vector (my-list)
-(make-array (list (length my-list)) :element-type 'bit :initial-contents my-list)
-)
+  (make-array (list (length my-list)) :element-type 'bit :initial-contents my-list)
+  )
 
 (define-test test-list-to-bit-vector
-    "you must complete list-to-bit-vector"
+  "you must complete list-to-bit-vector"
   (assert-true (typep (list-to-bit-vector '(0 0 1 1 0)) 'bit-vector))
   (assert-equal (aref (list-to-bit-vector '(0)) 0) 0)
   (assert-equal (aref (list-to-bit-vector '(0 1)) 1) 1)

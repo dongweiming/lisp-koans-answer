@@ -2,17 +2,17 @@
   ;; the let pattern allows us to create local variables with
   ;; lexical scope.
   (let (var_name_1 (var_name_2 "Michael"))
-  ;; variables may be defined with or without initial values.
-  (and
-   (equalp var_name_2 "Michael")
-   ; new values may be assigned to variables with setf
-   (setf var_name_2 "Janet")
-   (equalp var_name_2 "Janet")
-   ; setf may assign multiple variables in one form.
-   (setf var_name_1 "Tito"
-         var_name_2 "Jermaine")
-   (equalp var_name_1 "Tito")
-   (equalp var_name_2 "Jermaine"))))
+    ;; variables may be defined with or without initial values.
+    (and
+     (equalp var_name_2 "Michael")
+     ; new values may be assigned to variables with setf
+     (setf var_name_2 "Janet")
+     (equalp var_name_2 "Janet")
+     ; setf may assign multiple variables in one form.
+     (setf var_name_1 "Tito"
+           var_name_2 "Jermaine")
+     (equalp var_name_1 "Tito")
+     (equalp var_name_2 "Jermaine"))))
 
 (defun test-setf-for-lists ()
   ;; setf also works on list elements
@@ -54,9 +54,9 @@
   (let ((fun-name (function-name testfun)))
     (if (apply testfun '())
         (format t ".")
-        (progn
-          (setf failed-test-names (cons fun-name failed-test-names))
-          (format t "F")))))
+      (progn
+       (setf failed-test-names (cons fun-name failed-test-names))
+       (format t "F")))))
 
 (defun function-name (function) (nth-value 2 (function-lambda-expression function)))
 
@@ -70,5 +70,5 @@
   (format t "~S failed.~%" test-name))
 
 (if (endp failed-test-names)  ; no failed tests
-    (format t "all tests pass.~%")
-    (mapcar #'report-failure failed-test-names))
+  (format t "all tests pass.~%")
+  (mapcar #'report-failure failed-test-names))

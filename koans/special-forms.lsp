@@ -26,7 +26,7 @@
 (defvar c 0)
 
 (define-test test-setf
-    "setf is used to assign values to symbols.  These symbols may refer to
+  "setf is used to assign values to symbols.  These symbols may refer to
      variables with lexical or dynamic scope."
   (setf my-name "David")
   (assert-equal my-name "David")
@@ -41,7 +41,7 @@
 
 
 (define-test test-let
-    "The let form establishes a lexical extent, within which explicit symbols
+  "The let form establishes a lexical extent, within which explicit symbols
      may be bound to values.  The binding only extends over the extent of the
      lexical form.  After which, the previous value, if it exists, is visible again."
   (setf a 10)
@@ -57,12 +57,12 @@
 
 
 (define-test test-let-default-value
-    "let vars have a default value"
-    (let ((x))
-      (assert-equal nil x)))
+  "let vars have a default value"
+  (let ((x))
+    (assert-equal nil x)))
 
 (define-test test-let-bindings-are-parallel
-    "When defining the bindings in the let form, later bindings may not depend
+  "When defining the bindings in the let form, later bindings may not depend
      on earlier ones"
   (setf a 100)
   (let ((a 5)
@@ -70,7 +70,7 @@
     (assert-equal b 1000)))
 
 (define-test test-let*-bindings-are-series
-    "let* is like let, but successive bindings may use values of previous ones"
+  "let* is like let, but successive bindings may use values of previous ones"
   (setf a 100)
   (let* ((a 5)
          (b (* 10 a)))
@@ -79,7 +79,7 @@
 
 
 (define-test write-your-own-let-statement
-    "fix the let statement to get the tests to pass"
+  "fix the let statement to get the tests to pass"
   (setf a 100)
   (setf b 200)
   (setf c 30)
@@ -96,7 +96,7 @@
 
 
 (define-test test-cond
-    "the cond form is like the c switch statement"
+  "the cond form is like the c switch statement"
   (setf a 4)
   (setf c
         (cond ((> a 0) :positive)
@@ -115,7 +115,7 @@
         (t :unknown)))
 
 (define-test test-your-own-cond-statement
-    "fix this by completing the 'cartoon-dads' function above"
+  "fix this by completing the 'cartoon-dads' function above"
   (assert-equal (cartoon-dads :bart) :homer)
   (assert-equal (cartoon-dads :stewie) :peter)
   (assert-equal (cartoon-dads :stan) :randy)

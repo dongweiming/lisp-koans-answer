@@ -14,8 +14,8 @@
 
 
 (defun shadow-z (z)
-;; reuses the symbol name z to build a return value
-;; returns a list like (value-of-z, 2) 
+  ;; reuses the symbol name z to build a return value
+  ;; returns a list like (value-of-z, 2)
   (cons z
         (cons (let ((z 2)) z)
               nil)))
@@ -25,7 +25,7 @@
 
 
 (defun code-block-01 ()
-;; illustrates a basic property of code-blocks
+  ;; illustrates a basic property of code-blocks
   (block here
     (return-from here 4)
     5))
@@ -55,15 +55,15 @@
 
 (define-test test-lexical-bindings-may-be-shadowed
   (assert-eq 10 (let ((f (let ((x 10))
-                 (lambda () x))))  ; <-- x bound lexically
-    (let ((x 20))          ; form 2
-      (funcall f)))))
+                           (lambda () x))))  ; <-- x bound lexically
+                  (let ((x 20))          ; form 2
+                    (funcall f)))))
 
 
 (define-test test-special-bindings-look-back-on-execution-path
   (assert-eq 20 (let ((f (let ((x 10))
-             (declare (special x))
-             (lambda () x))))      ; <-- x bound dynamically
-    (let ((x 20))          ; form 2
-      (declare (special x))
-    (funcall f)))))
+                           (declare (special x))
+                           (lambda () x))))      ; <-- x bound dynamically
+                  (let ((x 20))          ; form 2
+                    (declare (special x))
+                    (funcall f)))))

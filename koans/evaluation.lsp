@@ -16,11 +16,11 @@
 ;; based on http://psg.com/~dlamkins/sl/chapter03-02.html
 
 (define-test test-function-name-is-first-argument
-    "In most imperative languages, the syntax of a function call has
+  "In most imperative languages, the syntax of a function call has
      the function name succeeded by a list of arguments.  In lisp,
      the function name and arguments are all part of the same list,
      with the function name the first element of that list."
-
+  
   "in these examples, the function names are +, -, and *"
   (assert-equal 5 (+ 2 3))
   (assert-equal -2 (- 1 3))
@@ -35,12 +35,12 @@
 
 
 (define-test test-evaluation-order
-    "Arguments to functions are evaluated before the function"
+  "Arguments to functions are evaluated before the function"
   (assert-equal 9 (* (+ 1 2) (- 13 10))))
 
 
 (define-test test-quoting-behavior
-    "Preceding a list with a quote (') will tell lisp not to evaluate a list.
+  "Preceding a list with a quote (') will tell lisp not to evaluate a list.
      The quote special form suppresses normal evaluation, and instead returns
      the literal list.
      Evaluating the form (+ 1 2) returns the number 3,

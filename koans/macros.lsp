@@ -24,11 +24,11 @@
 (defmacro repeat-2 (f) (list 'progn f f))
 
 (define-test test-macro-expands
-    "assert-expands checks the expanded macro form against expectation."
+  "assert-expands checks the expanded macro form against expectation."
   (assert-expands
    '(progn (do-something arg1 arg2) (do-something arg1 arg2))
    (repeat-2 (do-something arg1 arg2)))
-
+  
   (assert-expands
    '(progn (setf x (+ 1 x)) (setf x (+ 1 x)))
    (repeat-2 (setf x (+ 1 x)))))
@@ -38,7 +38,7 @@
 
 
 (define-test test-backtick-form
-    "backtick (`) form is much like single-quote (') form, except that subforms
+  "backtick (`) form is much like single-quote (') form, except that subforms
      preceded by a comma (,) are evaluated, rather then left as literals"
   (let ((num 5)
         (word 'dolphin))
@@ -49,17 +49,17 @@
 
 
 (define-test test-at-form
-    "The at form, (@) in the backtick context splices a list variables into
+  "The at form, (@) in the backtick context splices a list variables into
      the form."
-    (let ((axis '(x y z)))
-      (assert-equal '(x y z) axis)
-      (assert-equal '(the axis are (x y z)) `(the axis are ,axis))
-      (assert-equal '(the axis are x y z) `(the axis are ,@axis)))
-    (let ((coordinates '((43.15 77.6) (42.36 71.06))))
-      (assert-equal '(the coordinates are ((43.15 77.6) (42.36 71.06)))
-        `(the coordinates are ,coordinates))
-      (assert-equal '(the coordinates are (43.15 77.6) (42.36 71.06))
-        `(the coordinates are ,@coordinates))))
+  (let ((axis '(x y z)))
+    (assert-equal '(x y z) axis)
+    (assert-equal '(the axis are (x y z)) `(the axis are ,axis))
+    (assert-equal '(the axis are x y z) `(the axis are ,@axis)))
+  (let ((coordinates '((43.15 77.6) (42.36 71.06))))
+    (assert-equal '(the coordinates are ((43.15 77.6) (42.36 71.06)))
+                  `(the coordinates are ,coordinates))
+    (assert-equal '(the coordinates are (43.15 77.6) (42.36 71.06))
+                  `(the coordinates are ,@coordinates))))
 
 
 ;; ---- On Gensym: based on ideas from common lisp cookbook
@@ -69,14 +69,14 @@
   `(progn (setf ,sym1 ,val) (setf ,sym2 ,val)))
 
 (define-test test-no-gensym
-    "macro expansions may introduce difficult to see
+  "macro expansions may introduce difficult to see
      interactions"
   (let ((x 0)
         (y 0))
     (double-setf-BAD x y 10)
     (assert-equal x 10)
     (assert-equal y 10))
-
+  
   (let ((x 0)
         (y 0))
     (double-setf-BAD x y (+ x 100))
@@ -87,16 +87,16 @@
 (defmacro double-setf-SAFER (sym1 sym2 val)
   (let ((new-fresh-symbol (gensym)))
     `(let ((,new-fresh-symbol ,val))
-       (progn (setf ,sym1 ,new-fresh-symbol) (setf ,sym2 ,new-fresh-symbol)))))
+      (progn (setf ,sym1 ,new-fresh-symbol) (setf ,sym2 ,new-fresh-symbol)))))
 
 (define-test test-with-gensym
-    "gensym creates a new symbol."
+  "gensym creates a new symbol."
   (let ((x 0)
         (y 0))
     (double-setf-SAFER x y 10)
     (assert-equal x 10)
     (assert-equal y 10))
-
+  
   (let ((x 0)
         (y 0))
     (double-setf-SAFER x y (+ x 100))
@@ -111,8 +111,8 @@
 (defmacro log-form (&body body)
   "records the body form to the list *log* and then evalues the body normally"
   `(let ((retval ,@body))
-     (push ',@body *log*)
-     retval))
+    (push ',@body *log*)
+    retval))
 
 (define-test test-basic-log-form
   "illustrates how the basic log-form macro above works"
@@ -140,12 +140,12 @@
    to the list *log-with-value* and then evalues the body normally"
   `(let ((logform nil)
          (retval ,@body))
-         (push (list :form ',@body :value retval) *log-with-value*)
-
-     retval))
+    (push (list :form ',@body :value retval) *log-with-value*)
+    
+    retval))
 
 (define-test test-log-form-and-value
-    "log should start out empty"
+  "log should start out empty"
   (assert-equal nil *log-with-value*)
   "log-form-with-value does not interfere with the usual return value"
   (assert-equal 1978 (log-form-with-value (* 2 23 43)))

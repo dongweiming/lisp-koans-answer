@@ -13,30 +13,30 @@
 ;;   limitations under the License.
 
 (define-test test-double-quoted-strings-are-strings
-    (let ((my-string "do or do not"))
-      (true-or-false? t (typep my-string 'string))
-      "strings are the same thing as vectors of characters"
-      (true-or-false? t (typep my-string 'array))
-      (assert-equal (aref "meat" 2) (aref "fiesta" 5))
-      "strings are not integers :p"
-      (true-or-false? nil (typep my-string 'integer))))
+  (let ((my-string "do or do not"))
+    (true-or-false? t (typep my-string 'string))
+    "strings are the same thing as vectors of characters"
+    (true-or-false? t (typep my-string 'array))
+    (assert-equal (aref "meat" 2) (aref "fiesta" 5))
+    "strings are not integers :p"
+    (true-or-false? nil (typep my-string 'integer))))
 
 
 (define-test test-multi-line-strings-are-strings
-    (let ((my-string "this is
+  (let ((my-string "this is
                       a multi
                       line string"))
-      (true-or-false? t (typep my-string 'string))))
+    (true-or-false? t (typep my-string 'string))))
 
 
 (define-test test-escape-quotes
-    (let ((my-string "this string has one of these \" in it"))
-      (true-or-false? t (typep my-string 'string))))
+  (let ((my-string "this string has one of these \" in it"))
+    (true-or-false? t (typep my-string 'string))))
 
 
 ; This test from common lisp cookbook
 (define-test test-substrings
-    "since strings are sequences, you may use subseq"
+  "since strings are sequences, you may use subseq"
   (let ((my-string "Groucho Marx"))
     (assert-equal "Marx" (subseq my-string 8))
     (assert-equal (subseq my-string 0 7) "Groucho")
@@ -55,7 +55,7 @@
 
 
 (define-test test-concatenating-strings
-    "concatenating strings in lisp is a little cumbersome"
+  "concatenating strings in lisp is a little cumbersome"
   (let ((a "this")
         (b "is")
         (c "unwieldy"))
@@ -63,7 +63,7 @@
 
 
 (define-test test-searching-for-characters
-    "you can use position to detect characters in strings
+  "you can use position to detect characters in strings
      (or elements of sequences)"
   (assert-equal 1 (position #\b "abc"))
   (assert-equal 2 (position #\c "abc"))
@@ -71,7 +71,7 @@
 
 
 (define-test test-finding-substrings
-    "search finds subsequences"
+  "search finds subsequences"
   (let ((title "A supposedly fun thing I'll never do again"))
     (assert-equal 2 (search "supposedly" title))
     (assert-equal nil (search "CHANGETHISWORD" title))))
